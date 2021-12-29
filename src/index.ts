@@ -1,5 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
-import { NSResponse, MXResponse, AResponse, TXTResponse } from "./types";
+import type { NSResponse, MXResponse, AResponse, TXTResponse } from "./types";
+
+export type { NSResponse, MXResponse, AResponse, TXTResponse };
 
 export default class MojoDnsclient {
   private readonly axiosClient: AxiosInstance;
