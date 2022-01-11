@@ -32,6 +32,7 @@ jobs:
           branch: ${{ github.ref }}
       - run: git config --global user.name "GitHub CD bot"
       - run: git config --global user.email "devin_98@msn.com"
+      - run: npm config set '//registry.npmjs.org/:_authToken' "${{ secrets.NPM_TOKEN }}"
       # upgrade npm version in package.json to the tag used in the release.
       - run: yarn version  --new-version ${{ github.event.release.tag_name }}
       # publish to NPM -> there is one caveat, continue reading for the fix
