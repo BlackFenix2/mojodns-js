@@ -1,6 +1,6 @@
 {
   "name": "mojodns",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "JavaScript client for the MojoDNS API",
   "source": "src/index.ts",
   "main": "dist/main.js",
@@ -9,7 +9,7 @@
   "scripts": {
     "prepare": "yarn build",
     "build": "parcel build",
-    "test": "jest",
+    "test": "echo \"Running tests for version $npm_package_version...\" && jest",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write \"src/**/*.ts\"",
     "preversion": "yarn lint",
