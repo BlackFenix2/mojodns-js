@@ -1,5 +1,12 @@
 import Client from "../src/index";
 
+import type {
+  NSResponse,
+  MXResponse,
+  AResponse,
+  TXTResponse,
+} from "../src/types";
+
 /**
  * Development key for testing the free plan
  */
@@ -16,7 +23,7 @@ describe("Client", () => {
       )
       .catch((err) => console.error(err));
   });
-  it("should return error on invalid domain", () => {
+  it("should abort on invalid domain", () => {
     expect.assertions(1);
     return client.getA("google.cwwom").catch((err) => {
       expect(err.message).toMatch("aborted");
