@@ -27,12 +27,10 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-          ref: ${{ github.event.release.target_commitish }}
       - run: git config --global user.name "GitHub CD bot"
       - run: git config --global user.email "devin_98@msn.com"
       # upgrade npm version in package.json to the tag used in the release.
-      - run: npm version ${{ github.event.release.tag_name }}
-      - run: npm config set '//registry.npmjs.org/:_authToken' "${{ secrets.NPM_TOKEN }}"
+      - run: yarn version  --new-version ${{ github.event.release.tag_name }}
       # publish to NPM -> there is one caveat, continue reading for the fix
       - run: yarn publish --ignore-scripts --tag ${{ github.event.release.target_commitish }}
         env:
