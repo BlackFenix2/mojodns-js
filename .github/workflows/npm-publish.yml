@@ -5,7 +5,7 @@ name: Node.js Package
 
 on:
   release:
-    types: [created]
+    types: [published]
 
 jobs:
   build:
@@ -27,6 +27,6 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: yarn publish --ignore-scripts
+      - run: yarn publish --ignore-scripts --new-version ${{ github.event.release.tag_name }}
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
