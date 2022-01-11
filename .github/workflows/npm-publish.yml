@@ -27,6 +27,18 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: yarn publish --ignore-scripts --new-version ${{ github.event.release.tag_name }}
+      - run: git config --global user.name "GitHub CD bot"
+      - run: git config --global user.email "savchenkoalexander91@gmail.com"
+      # upgrade npm version in package.json to the tag used in the release.
+      - run: npm version ${{ github.event.release.tag_name }}
+      - run: npm config set '//registry.npmjs.org/:_authToken' "${{ secrets.NPM_TOKEN }}"
+      # publish to NPM -> there is one caveat, continue reading for the fix
+      - run: npm publish --tag ${{ github.event.release.target_commitish }}
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          # Use a token to publish to NPM. See below for how to set it up
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # push the version changes to GitHub
+      - run: git push
+        env:
+          # The secret is passed automatically. Nothing to configure.
+          github-token: ${{ secrets.GITHUB_TOKEN }}
