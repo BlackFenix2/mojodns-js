@@ -24,7 +24,6 @@ describe("Client", () => {
       .catch((err) => console.error(err));
   });
   it("should abort on invalid domain", () => {
-    expect.assertions(1);
     return client.getA("google.cwwom").catch((err) => {
       expect(err.message).toMatch("aborted");
     });
