@@ -27,6 +27,7 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+          ref: ${{ github.event.release.target_commitish }}
       - run: git config --global user.name "GitHub CD bot"
       - run: git config --global user.email "devin_98@msn.com"
       # upgrade npm version in package.json to the tag used in the release.
